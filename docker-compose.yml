@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    env_file: .env
+    ports:
+      - "8700:8700"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: "2.0"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8700/health')"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# This compose runs the cloud-only image and reads config from .env.
+# For production, prefer Docker secrets (files in ./secrets/) over .env — the
+# server reads /run/secrets/<name> first; see .env.example for the mapping.
