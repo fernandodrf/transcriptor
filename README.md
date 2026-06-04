@@ -66,13 +66,13 @@ python transcribe_cli.py meeting.mp3 -f json -o out.json
 
 ```
 ┌─────────────┐   multipart    ┌────────────────────┐
-│  Web UI     │ ─────────────▶ │  FastAPI server    │
+│  Web UI     │ ─────────────▶│  FastAPI server    │
 │  (vanilla   │   /api/        │  server.py         │
-│   JS)       │ ◀───────────── │                    │
+│   JS)       │ ◀─────────────│                    │
 └─────────────┘   JSON         │  ┌──────────────┐  │   REST    ┌──────────┐
-                               │  │ Soniox       │ ─┼─────────▶ │ Soniox   │
+                               │  │ Soniox       │ ─┼─────────▶│ Soniox   │
 ┌─────────────┐                │  └──────────────┘  │           │ cloud    │
-│  CLI client │ ─────────────▶ │  ┌──────────────┐  │           └──────────┘
+│  CLI client │ ─────────────▶│  ┌──────────────┐  │           └──────────┘
 │ transcribe  │                │  │ Parakeet V3  │  │  subprocess (Py 3.13)
 │  _cli.py    │                │  │  (optional)  │ ─┼─▶ parakeet_worker.py
 └─────────────┘                │  └──────────────┘  │   + pyannote diarization
