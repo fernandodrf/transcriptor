@@ -197,7 +197,7 @@ def unified_response(provider: str, segments: list, raw: dict = None, duration_s
 # ---------------------------------------------------------------------------
 
 SONIOX_API_URL = os.getenv("SONIOX_API_URL", "https://api.soniox.com")
-SONIOX_MODEL = os.getenv("SONIOX_MODEL", "stt-async-v4")
+SONIOX_MODEL = os.getenv("SONIOX_MODEL", "stt-async-v5")
 
 
 async def transcribe_soniox(file_path: str, language: str) -> dict:
